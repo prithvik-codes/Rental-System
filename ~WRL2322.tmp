@@ -1,0 +1,472 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<title>Project Report - Rental Management System</title>
+<!--[if gte mso 9]>
+<xml>
+<w:WordDocument>
+<w:View>Print</w:View>
+<w:Zoom>100</w:Zoom>
+</w:WordDocument>
+</xml>
+<![endif]-->
+<style>
+@page {
+    size: 8.5in 11in;
+    margin: 1.0in 1.0in 1.0in 1.0in;
+}
+body {
+    font-family: 'Calibri', 'Arial', sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #333333;
+}
+.cover-page {
+    text-align: center;
+    margin-top: 100px;
+    height: 100%;
+}
+.project-title {
+    font-size: 26pt;
+    font-weight: bold;
+    color: #1F497D;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+.project-subtitle {
+    font-size: 16pt;
+    color: #595959;
+    margin-bottom: 150px;
+}
+.team-details {
+    font-size: 13pt;
+    margin-top: 100px;
+    line-height: 1.8;
+}
+.team-title {
+    font-weight: bold;
+    color: #1F497D;
+    font-size: 14pt;
+    margin-bottom: 15px;
+}
+.author-name {
+    font-size: 13pt;
+    color: #333333;
+}
+.page-break {
+    page-break-before: always;
+}
+h2 {
+    font-size: 16pt;
+    color: #1F497D;
+    border-bottom: 2px solid #1F497D;
+    padding-bottom: 4px;
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+h3 {
+    font-size: 13pt;
+    color: #365F91;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+.index-list {
+    font-size: 12pt;
+    line-height: 2.0;
+}
+.index-dots {
+    color: #888888;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+th {
+    background-color: #1F497D;
+    color: white;
+    font-weight: bold;
+    border: 1px solid #D3D3D3;
+    padding: 10px;
+    text-align: left;
+    font-size: 11pt;
+}
+td {
+    border: 1px solid #D3D3D3;
+    padding: 10px;
+    font-size: 10.5pt;
+}
+tr:nth-child(even) {
+    background-color: #F2F5F8;
+}
+.code-block {
+    background-color: #F4F6F9;
+    border-left: 4px solid #1F497D;
+    padding: 12px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 9.5pt;
+    white-space: pre;
+    margin: 15px 0;
+}
+.bullet-list {
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+.bullet-list li {
+    margin-bottom: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover-page">
+    <div style="height: 100px;"></div>
+    <div class="project-title">RENTAL MANAGEMENT SYSTEM</div>
+    <div class="project-subtitle">Backend API Development Report</div>
+    
+    <div style="height: 150px;"></div>
+    
+    <div class="team-details">
+        <div class="team-title">Submitted By:</div>
+        <div class="author-name">Tanishq Dhote</div>
+        <div class="author-name">Prithviraj Kshirsagar</div>
+        <div class="author-name">Sudesh Jambhulkar</div>
+    </div>
+    
+    <div style="height: 100px;"></div>
+    <div style="font-size: 11pt; color: #7F7F7F;">Date: June 18, 2026</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- TABLE OF CONTENTS (INDEX) -->
+<div>
+    <h2>Table of Contents</h2>
+    <div style="height: 20px;"></div>
+    <div class="index-list">
+        1. Project Overview ......................................................................................... Page 3<br/>
+        2. Technology Stack & Tools Used ..................................................................... Page 4<br/>
+        3. Database Schema Design (ER) ...................................................................... Page 5<br/>
+        4. Application Architecture ............................................................................... Page 6<br/>
+        5. Postman Integration & Testing Guide ............................................................. Page 7<br/>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 1 -->
+<div>
+    <h2>1. Project Overview</h2>
+    <p>
+        The Rental Management System is a web service designed to facilitate tenancy leases, property listings, and secure user management. Built with FastAPI and backed by a relational PostgreSQL database, it provides robust APIs that allow landlords to list rental properties and tenants to search for and lease available accommodations.
+    </p>
+    <p>
+        Security is managed using industry-standard JSON Web Tokens (JWT) for authentication. Additionally, role-based authorization enforces access control, ensuring only authorized landlord accounts can modify property listings while tenant accounts are permitted to sign tenancy contracts.
+    </p>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 2 -->
+<div>
+    <h2>2. Technology Stack & Tools Used</h2>
+    <p>The following tools and frameworks were utilized to build and run the application:</p>
+    
+    <table>
+        <tr>
+            <th>Technology / Tool</th>
+            <th>Purpose & Role in Project</th>
+        </tr>
+        <tr>
+            <td><b>FastAPI</b></td>
+            <td>Python web framework used for designing the RESTful endpoints, validating requests, and generating automatic Swagger documentation.</td>
+        </tr>
+        <tr>
+            <td><b>PostgreSQL</b></td>
+            <td>Relational Database Management System (RDBMS) used for secure, relational, and persistent data storage.</td>
+        </tr>
+        <tr>
+            <td><b>SQLAlchemy</b></td>
+            <td>Object-Relational Mapping (ORM) library used to interact with the PostgreSQL database using Python classes (models) instead of raw SQL queries.</td>
+        </tr>
+        <tr>
+            <td><b>Uvicorn</b></td>
+            <td>Asynchronous Server Gateway Interface (ASGI) web server used to run the FastAPI application locally.</td>
+        </tr>
+        <tr>
+            <td><b>Pydantic</b></td>
+            <td>Data parsing and validation library used to define request and response payloads (schemas) with strict type checking.</td>
+        </tr>
+        <tr>
+            <td><b>python-jose & bcrypt</b></td>
+            <td>Libraries used to securely hash user passwords (using bcrypt) and generate/validate signed JSON Web Tokens (JWT).</td>
+        </tr>
+        <tr>
+            <td><b>Postman</b></td>
+            <td>API client used for manually calling, testing, and verifying the routes during development.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 3 -->
+<div>
+    <h2>3. Database Schema Design (ER)</h2>
+    <p>
+        The relational database schema is structured into three main tables: <b>users</b>, <b>properties</b>, and <b>leases</b>. Below is the relational structure of the tables:
+    </p>
+    
+    <h3>3.1 Database Tables</h3>
+    
+    <b>Users Table (users)</b>
+    <table>
+        <tr>
+            <th>Column Name</th>
+            <th>Data Type</th>
+            <th>Constraints</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>VARCHAR</td>
+            <td>Primary Key</td>
+            <td>Unique identifier (UUID) generated on signup.</td>
+        </tr>
+        <tr>
+            <td>username</td>
+            <td>VARCHAR</td>
+            <td>Non-nullable</td>
+            <td>The display name of the user.</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR</td>
+            <td>Unique, Non-nullable</td>
+            <td>User's email address (used for login).</td>
+        </tr>
+        <tr>
+            <td>password</td>
+            <td>VARCHAR</td>
+            <td>Non-nullable</td>
+            <td>Salted and hashed password.</td>
+        </tr>
+        <tr>
+            <td>role</td>
+            <td>VARCHAR</td>
+            <td>Default: 'tenant'</td>
+            <td>Access role: 'landlord' or 'tenant'.</td>
+        </tr>
+    </table>
+
+    <b>Properties Table (properties)</b>
+    <table>
+        <tr>
+            <th>Column Name</th>
+            <th>Data Type</th>
+            <th>Constraints</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>INTEGER</td>
+            <td>Primary Key, Autoincrement</td>
+            <td>Unique identifier for the property listing.</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>VARCHAR</td>
+            <td>Non-nullable</td>
+            <td>Heading/title of the property.</td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td>TEXT</td>
+            <td>Nullable</td>
+            <td>Detailed description.</td>
+        </tr>
+        <tr>
+            <td>address</td>
+            <td>VARCHAR</td>
+            <td>Non-nullable</td>
+            <td>Physical location of the property.</td>
+        </tr>
+        <tr>
+            <td>price_per_month</td>
+            <td>DOUBLE PRECISION</td>
+            <td>Non-nullable</td>
+            <td>Monthly rental cost.</td>
+        </tr>
+        <tr>
+            <td>is_available</td>
+            <td>BOOLEAN</td>
+            <td>Default: True</td>
+            <td>Tracks if the property is currently rentable.</td>
+        </tr>
+        <tr>
+            <td>owner_id</td>
+            <td>VARCHAR</td>
+            <td>Foreign Key</td>
+            <td>References <i>users(id)</i> (Landlord only).</td>
+        </tr>
+    </table>
+
+    <b>Leases Table (leases)</b>
+    <table>
+        <tr>
+            <th>Column Name</th>
+            <th>Data Type</th>
+            <th>Constraints</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>INTEGER</td>
+            <td>Primary Key, Autoincrement</td>
+            <td>Unique identifier for the lease contract.</td>
+        </tr>
+        <tr>
+            <td>property_id</td>
+            <td>INTEGER</td>
+            <td>Foreign Key</td>
+            <td>References <i>properties(id)</i>.</td>
+        </tr>
+        <tr>
+            <td>tenant_id</td>
+            <td>VARCHAR</td>
+            <td>Foreign Key</td>
+            <td>References <i>users(id)</i>.</td>
+        </tr>
+        <tr>
+            <td>start_date</td>
+            <td>DATE</td>
+            <td>Non-nullable</td>
+            <td>Lease start date.</td>
+        </tr>
+        <tr>
+            <td>end_date</td>
+            <td>DATE</td>
+            <td>Non-nullable</td>
+            <td>Lease expiration date.</td>
+        </tr>
+        <tr>
+            <td>rent_amount</td>
+            <td>DOUBLE PRECISION</td>
+            <td>Non-nullable</td>
+            <td>Agreed monthly rent.</td>
+        </tr>
+        <tr>
+            <td>status</td>
+            <td>VARCHAR</td>
+            <td>Default: 'active'</td>
+            <td>Lease status ('active' or 'terminated').</td>
+        </tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 4 -->
+<div>
+    <h2>4. Application Architecture</h2>
+    <p>
+        The application is built on a layered architecture separating routing, validation, business logic, and database persistence:
+    </p>
+    
+    <div class="code-block">
+  [ Client Request ]
+         │ (HTTP Request with Headers & JSON payload)
+         ▼
+  [ API Routers (app.py) ]
+         │ (Routes requests to endpoint functions)
+         ▼
+  [ Auth / Role Check Dependencies (dependencies.py) ]
+         │ (Validates JWT tokens & checks roles)
+         ▼
+  [ Schemas validation (schemas.py) ]
+         │ (Ensures request and response schemas are valid)
+         ▼
+  [ SQLAlchemy Session Manager (database.py) ]
+         │ (Translates operations into SQL transactions)
+         ▼
+  [ PostgreSQL Database (rental_db) ]
+    </div>
+    
+    <h3>4.1 Request Flow and Business Rules</h3>
+    <ul class="bullet-list">
+        <li><b>Authentication Check</b>: Endpoint paths that require authentication use the <i>get_current_user</i> dependency, which decodes the JWT token from the HTTP Bearer header, validates it against the signing key, and retrieves the matching user record from the database.</li>
+        <li><b>Role Restriction</b>: Landlord endpoints (e.g. creating/updating properties) are protected by <i>check_landlord</i>, which returns a 403 Forbidden error if a tenant tries to list a house.</li>
+        <li><b>Lease Automation</b>: When a tenant successfully leases a property (`POST /leases`), the system automatically registers the lease in the database and updates the property's `is_available` column to `False`. When a lease is terminated (`POST /leases/{id}/terminate`), the property availability is set back to `True`.</li>
+    </ul>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 5 -->
+<div>
+    <h2>5. Postman Integration & Testing Guide</h2>
+    <p>
+        Postman was used extensively to verify and interact with the backend endpoints during testing. Below are the steps to execute requests in Postman:
+    </p>
+
+    <h3>5.1 Sign Up (`POST /signup`)</h3>
+    <p>
+        Sends user registration payload as a JSON object:
+    </p>
+    <ul class="bullet-list">
+        <li><b>URL</b>: <code>http://127.0.0.1:8000/signup</code></li>
+        <li><b>Method</b>: POST</li>
+        <li><b>Headers</b>: <code>Content-Type: application/json</code></li>
+        <li><b>Body</b> (raw JSON):
+            <div class="code-block">{
+    "username": "Vinay Sharma",
+    "email": "vinays@google.com",
+    "password": "vinay12345",
+    "role": "landlord"
+}</div>
+        </li>
+    </ul>
+
+    <h3>5.2 Login & Token Retrieval (`POST /login`)</h3>
+    <p>
+        FastAPI uses the OAuth2 standard, which expects credentials as URL-encoded Form Data rather than raw JSON.
+    </p>
+    <ul class="bullet-list">
+        <li><b>URL</b>: <code>http://127.0.0.1:8000/login</code></li>
+        <li><b>Method</b>: POST</li>
+        <li><b>Body</b>: Select <b>x-www-form-urlencoded</b> and enter key-values:
+            <ul class="bullet-list">
+                <li><code>username</code>: vinays@google.com (or username)</li>
+                <li><code>password</code>: vinay12345</li>
+            </ul>
+        </li>
+        <li><b>Result</b>: Retreives a response containing <code>access_token</code>, <code>refresh_token</code>, and <code>token_type</code>. Copy the <code>access_token</code> string.</li>
+    </ul>
+
+    <h3>5.3 Calling Authenticated Routes (e.g., `POST /properties`)</h3>
+    <p>
+        To access protected endpoints, you must include the token in your headers:
+    </p>
+    <ul class="bullet-list">
+        <li><b>URL</b>: <code>http://127.0.0.1:8000/properties</code></li>
+        <li><b>Method</b>: POST</li>
+        <li><b>Authorization Tab</b>:
+            <ul class="bullet-list">
+                <li><b>Type</b>: Select <i>Bearer Token</i>.</li>
+                <li><b>Token</b>: Paste the copied <code>access_token</code> string.</li>
+            </ul>
+        </li>
+        <li><b>Body</b> (raw JSON):
+            <div class="code-block">{
+    "title": "Beautiful Villa",
+    "description": "3 BHK Spacious Villa with garden.",
+    "address": "45 Green Avenues, Pune",
+    "price_per_month": 45000.0
+}</div>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
