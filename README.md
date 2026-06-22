@@ -113,7 +113,6 @@ erDiagram
         string status
     }
 ```
-
 ---
 
 ## 🚦 Setup & Getting Started
