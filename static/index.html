@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentFlow - Premium Rental Management System</title>
+    <meta name="description" content="Manage landlords, tenants, properties, and lease agreements in one sleek, secure platform.">
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="dark-theme">
+    <!-- Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Cursor Follow Glow Element -->
+    <div class="cursor-glow" id="cursor-glow">
+        <div class="glow-wave"></div>
+    </div>
+
+    <!-- Background decorative blur shapes -->
+    <div class="bg-blur blur-1"></div>
+    <div class="bg-blur blur-2"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand" id="nav-brand-logo">
+                <i data-lucide="home" class="brand-icon"></i>
+                <span class="brand-text">RentFlow</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#" class="nav-link active" id="link-explore" data-target="view-explore">
+                    <i data-lucide="search"></i> Explore
+                </a>
+                <a href="#" class="nav-link hidden" id="link-leases" data-target="view-leases">
+                    <i data-lucide="file-text"></i> My Leases
+                </a>
+                <a href="#" class="nav-link hidden" id="link-dashboard" data-target="view-dashboard">
+                    <i data-lucide="layout-dashboard"></i> Dashboard
+                </a>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Theme Toggle -->
+                <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+                    <i data-lucide="sun" class="sun-icon"></i>
+                    <i data-lucide="moon" class="moon-icon"></i>
+                </button>
+
+                <!-- User Profile / Session Control -->
+                <div class="auth-buttons" id="auth-header-actions">
+                    <button class="btn btn-secondary" id="btn-open-login">Sign In</button>
+                    <button class="btn btn-primary" id="btn-open-register">Get Started</button>
+                </div>
+                
+                <div class="user-profile-menu hidden" id="user-profile-badge">
+                    <div class="user-info">
+                        <span class="username" id="display-username">John Doe</span>
+                        <span class="badge" id="display-role">Landlord</span>
+                    </div>
+                    <button class="btn btn-icon-outline" id="btn-logout" aria-label="Log Out">
+                        <i data-lucide="log-out"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Containers -->
+    <main class="main-content">
+        
+        <!-- ================= LANDING/HERO SECTION ================= -->
+        <section id="view-hero" class="view-section hero-section">
+            <div class="hero-content">
+                <div class="badge-tag">
+                    <span class="pulse-dot"></span> Smart Rental Ecosystem
+                </div>
+                <h1 class="hero-title">Simplify Your <span class="gradient-text">Rental Journey</span></h1>
+                <p class="hero-subtitle">The premium platform connecting landlords and tenants. Manage listings, sign lease agreements, and track payments all in one beautiful glassmorphic dashboard.</p>
+                <div class="hero-ctas">
+                    <button class="btn btn-primary btn-lg" id="hero-btn-explore">Explore Available Listings</button>
+                    <button class="btn btn-secondary btn-lg" id="hero-btn-join">Join as Landlord</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>100%</h3>
+                        <p>Digital Leases</p>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>Self Service</p>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <h3>Secure</h3>
+                        <p>JWT & Encryption</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= LISTINGS EXPLORER SECTION ================= -->
+        <section id="view-explore" class="view-section active">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Available Properties</h2>
+                    <p class="section-description">Find your next dream home. Filter by price, search keywords, or availability status.</p>
+                </div>
+            </div>
+
+            <!-- Filters Bar -->
+            <div class="filters-bar">
+                <div class="search-input-wrapper">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" id="filter-search" placeholder="Search by title, location, or features...">
+                </div>
+                <div class="filters-group">
+                    <div class="select-wrapper">
+                        <select id="filter-price">
+                            <option value="">Any Price</option>
+                            <option value="25000">Under ₹25,000/mo</option>
+                            <option value="50000">Under ₹50,000/mo</option>
+                            <option value="75000">Under ₹75,000/mo</option>
+                            <option value="100000">Under ₹1,00,000/mo</option>
+                        </select>
+                    </div>
+                    <div class="select-wrapper">
+                        <select id="filter-availability">
+                            <option value="all">All Properties</option>
+                            <option value="available" selected>Available Only</option>
+                            <option value="rented">Rented Only</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listings Grid -->
+            <div class="listings-grid" id="properties-grid">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading premier spaces for you...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= LANDLORD DASHBOARD ================= -->
+        <section id="view-dashboard" class="view-section hidden">
+            <div class="dashboard-header">
+                <div>
+                    <h2 class="section-title">Landlord Dashboard</h2>
+                    <p class="section-description">Manage your real estate catalog, monitor lease terms, and view financial performance metrics.</p>
+                </div>
+                <button class="btn btn-primary" id="btn-add-property">
+                    <i data-lucide="plus"></i> Add Property
+                </button>
+            </div>
+
+            <!-- Analytics Cards Grid -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon-bg primary">
+                        <i data-lucide="building"></i>
+                    </div>
+                    <div class="metric-info">
+                        <p class="metric-label">Properties Owned</p>
+                        <h3 class="metric-value" id="metric-total-properties">0</h3>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon-bg success">
+                        <i data-lucide="file-check"></i>
+                    </div>
+                    <div class="metric-info">
+                        <p class="metric-label">Occupancy Rate</p>
+                        <h3 class="metric-value" id="metric-occupancy">0%</h3>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon-bg info">
+                        <i data-lucide="indian-rupee"></i>
+                    </div>
+                    <div class="metric-info">
+                        <p class="metric-label">Monthly Revenue</p>
+                        <h3 class="metric-value" id="metric-revenue">₹0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-tabs">
+                <button class="dash-tab active" data-tab="tab-properties">My Listings</button>
+                <button class="dash-tab" data-tab="tab-leases">Active Leases</button>
+            </div>
+
+            <!-- Landlord: Properties Tab -->
+            <div id="tab-properties" class="dash-tab-content active">
+                <div class="listings-grid" id="landlord-properties-grid">
+                    <!-- Dynamic properties list -->
+                </div>
+            </div>
+
+            <!-- Landlord: Leases Tab -->
+            <div id="tab-leases" class="dash-tab-content">
+                <div class="table-container glass-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>Tenant ID</th>
+                                <th>Rent Amount</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="landlord-leases-table-body">
+                            <!-- Dynamic leases table rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TENANT LEASES VIEW ================= -->
+        <section id="view-leases" class="view-section hidden">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">My Lease Agreements</h2>
+                    <p class="section-description">Review details of your current rental contracts, lease start/end dates, and manage active tenancies.</p>
+                </div>
+            </div>
+
+            <div class="tenant-metrics metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon-bg primary">
+                        <i data-lucide="key-round"></i>
+                    </div>
+                    <div class="metric-info">
+                        <p class="metric-label">Active Contracts</p>
+                        <h3 class="metric-value" id="tenant-active-leases-count">0</h3>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon-bg info">
+                        <i data-lucide="indian-rupee"></i>
+                    </div>
+                    <div class="metric-info">
+                        <p class="metric-label">Total Monthly Commitment</p>
+                        <h3 class="metric-value" id="tenant-total-rent">₹0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leases List for Tenant -->
+            <div class="leases-list-container" id="tenant-leases-container">
+                <!-- Dynamic Tenant Lease Cards -->
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 RentFlow Inc. All rights reserved.</p>
+    </footer>
+
+    <!-- ================= AUTHENTICATION MODAL ================= -->
+    <div class="modal-backdrop" id="modal-auth">
+        <div class="modal-container glass-container">
+            <button class="modal-close" id="btn-close-auth" aria-label="Close Modal">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-header">
+                <h3 class="modal-title" id="auth-modal-title">Sign In to RentFlow</h3>
+                <p class="modal-subtitle" id="auth-modal-subtitle">Welcome back! Please enter your details.</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login">Login</button>
+                <button class="auth-tab" id="tab-signup">Register</button>
+            </div>
+
+            <form class="auth-form" id="form-auth">
+                <div class="form-group" id="group-username">
+                    <label for="auth-username">Username</label>
+                    <div class="input-icon-wrapper">
+                        <i data-lucide="user" class="input-icon"></i>
+                        <input type="text" id="auth-username" autocomplete="username" placeholder="johndoe">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="auth-email">Email or Username</label>
+                    <div class="input-icon-wrapper">
+                        <i data-lucide="mail" class="input-icon"></i>
+                        <input type="text" id="auth-email" placeholder="landlord or landlord@rentflow.in" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="auth-password">Password</label>
+                    <div class="input-icon-wrapper">
+                        <i data-lucide="lock" class="input-icon"></i>
+                        <input type="password" id="auth-password" autocomplete="current-password" placeholder="••••••••" required>
+                    </div>
+                </div>
+                <div class="form-group hidden" id="group-role">
+                    <label>Choose Your Role</label>
+                    <div class="role-selector">
+                        <label class="role-option">
+                            <input type="radio" name="auth-role" value="tenant" checked>
+                            <span class="role-card">
+                                <i data-lucide="user-check"></i>
+                                <strong>Tenant</strong>
+                                <span>I want to rent properties</span>
+                            </span>
+                        </label>
+                        <label class="role-option">
+                            <input type="radio" name="auth-role" value="landlord">
+                            <span class="role-card">
+                                <i data-lucide="building-2"></i>
+                                <strong>Landlord</strong>
+                                <span>I own properties to lease</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-auth-submit">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= ADD/EDIT PROPERTY MODAL ================= -->
+    <div class="modal-backdrop" id="modal-property">
+        <div class="modal-container glass-container">
+            <button class="modal-close" id="btn-close-property" aria-label="Close Modal">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-header">
+                <h3 class="modal-title" id="property-modal-title">List New Property</h3>
+                <p class="modal-subtitle">Configure details and publish your listing to our discovery feed.</p>
+            </div>
+            
+            <form id="form-property">
+                <input type="hidden" id="property-id">
+                <div class="form-group">
+                    <label for="prop-title">Listing Title</label>
+                    <input type="text" id="prop-title" placeholder="Luxurious Highrise Condo with Skyline View" required>
+                </div>
+                <div class="form-group">
+                    <label for="prop-address">Street Address</label>
+                    <input type="text" id="prop-address" placeholder="742 Evergreen Terrace, Springfield" required>
+                </div>
+                <div class="form-group">
+                    <label for="prop-price">Monthly Rent (₹ INR)</label>
+                    <div class="input-icon-wrapper">
+                        <span class="input-currency-prefix">₹</span>
+                        <input type="number" id="prop-price" min="1" placeholder="25000" required style="padding-left: 28px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="prop-image-url">Image URL (Internet Link)</label>
+                    <div class="input-icon-wrapper">
+                        <i data-lucide="image" class="input-icon"></i>
+                        <input type="url" id="prop-image-url" placeholder="https://images.unsplash.com/photo-..." style="padding-left: 36px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="prop-description">Property Description</label>
+                    <textarea id="prop-description" rows="4" placeholder="Describe the property layout, amenities, policy details, utilities included..."></textarea>
+                </div>
+                <div class="form-group flex-row hidden" id="group-prop-available">
+                    <input type="checkbox" id="prop-available" checked>
+                    <label for="prop-available" class="checkbox-label">Available for leases</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-property-submit">Publish Listing</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= LEASE AGREEMENT MODAL ================= -->
+    <div class="modal-backdrop" id="modal-lease">
+        <div class="modal-container glass-container">
+            <button class="modal-close" id="btn-close-lease" aria-label="Close Modal">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-header">
+                <h3 class="modal-title">Sign Lease Agreement</h3>
+                <p class="modal-subtitle">Review terms and select the lease dates to secure this property.</p>
+            </div>
+
+            <div class="lease-summary-card">
+                <h4 id="lease-prop-title">Modern Studio Apartment</h4>
+                <p id="lease-prop-address"><i data-lucide="map-pin"></i> Kalyani Nagar, Pune</p>
+                <div class="lease-rate">
+                    <span class="rate-value" id="lease-prop-price">₹18,000</span>
+                    <span class="rate-period">/ month</span>
+                </div>
+            </div>
+            
+            <form id="form-lease">
+                <input type="hidden" id="lease-property-id">
+                <input type="hidden" id="lease-rent-amount">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lease-start-date">Lease Start Date</label>
+                        <input type="date" id="lease-start-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lease-end-date">Lease End Date</label>
+                        <input type="date" id="lease-end-date" required>
+                    </div>
+                </div>
+
+                <div class="lease-estimate-box">
+                    <div class="estimate-row">
+                        <span>Lease Duration:</span>
+                        <strong id="estimate-months">0 months</strong>
+                    </div>
+                    <div class="estimate-row total">
+                        <span>Total Rent Commitment:</span>
+                        <strong id="estimate-total-cost">₹0</strong>
+                    </div>
+                </div>
+
+                <div class="legal-disclaimer">
+                    <i data-lucide="info"></i>
+                    <p>By clicking "Sign and Rent", you enter a legally binding lease agreement under the defined terms and rates.</p>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-block btn-lg" id="btn-lease-submit">Sign and Rent Space</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Engine Logic -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

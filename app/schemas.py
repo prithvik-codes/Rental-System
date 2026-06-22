@@ -42,6 +42,7 @@ class PropertyBase(BaseModel):
     description: Optional[str] = None
     address: str = Field(..., min_length=5, max_length=255)
     price_per_month: float = Field(..., gt=0)
+    image_url: Optional[str] = None
 
 
 class PropertyCreate(PropertyBase):
@@ -53,6 +54,7 @@ class PropertyUpdate(BaseModel):
     description: Optional[str] = None
     address: Optional[str] = Field(None, min_length=5, max_length=255)
     price_per_month: Optional[float] = Field(None, gt=0)
+    image_url: Optional[str] = None
     is_available: Optional[bool] = None
 
 

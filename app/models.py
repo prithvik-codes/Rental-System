@@ -23,6 +23,7 @@ class Property(Base):
     description = Column(String, nullable=True)
     address = Column(String, nullable=False)
     price_per_month = Column(Float, nullable=False)
+    image_url = Column(String, nullable=True)
     is_available = Column(Boolean, default=True, nullable=False)
     owner_id = Column(String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
 

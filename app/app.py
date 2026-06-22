@@ -18,11 +18,24 @@ from app.utils import (
     verify_password
 )
 from app.dependencies import get_current_user, check_landlord, check_tenant
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
 
 # Initialize tables in PostgreSQL
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Rental Management System")
+
+# Enable CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.post('/signup', summary="Create new user", response_model=UserOut)
@@ -113,6 +126,7 @@ async def create_property(
         description=property_data.description,
         address=property_data.address,
         price_per_month=property_data.price_per_month,
+        image_url=property_data.image_url,
         is_available=True,
         owner_id=current_user.id
     )
@@ -175,6 +189,8 @@ async def update_property(
         prop.address = property_data.address
     if property_data.price_per_month is not None:
         prop.price_per_month = property_data.price_per_month
+    if property_data.image_url is not None:
+        prop.image_url = property_data.image_url
     if property_data.is_available is not None:
         prop.is_available = property_data.is_available
 
@@ -318,3 +334,20 @@ async def terminate_lease(
 
     db.commit()
     return {"detail": "Lease terminated successfully, property is now available"}
+
+
+# Serve static files
+current_dir = os.path.dirname(os.path.abspath(__file__))
+static_dir = os.path.join(current_dir, "..", "static")
+
+# Create static directory if it doesn't exist
+os.makedirs(static_dir, exist_ok=True)
+
+app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
+@app.get("/")
+async def read_index():
+    index_path = os.path.join(static_dir, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return {"message": "Rental Management System API is running. Frontend static/index.html not found."}
