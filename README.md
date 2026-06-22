@@ -1,4 +1,4 @@
-# RentFlow - Premium Full-Stack Rental Management System
+# RentFlow - Rental Management System
 
 RentFlow is a modern, high-fidelity, single-page full-stack web application designed for landlords to list properties and manage tenancies, and for tenants to find homes and execute digital lease agreements. It features a stunning glassmorphic UI, smooth micro-animations, and a highly responsive green-blue cursor-following liquid wave glow.
 
