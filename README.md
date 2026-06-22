@@ -83,34 +83,34 @@ erDiagram
     User ||--o{ Property : owns
     User ||--o{ Lease : leases
     Property ||--o{ Lease : has
-    
+
     User {
-        string id PK "uuid4"
+        string id PK
         string username
-        string email UNIQUE
-        string password "hashed"
-        string role "landlord / tenant"
+        string email UK
+        string password
+        string role
     }
-    
+
     Property {
-        int id PK "autoincrement"
+        int id PK
         string title
         string description
         string address
         float price_per_month
-        string image_url "optional internet url"
+        string image_url
         boolean is_available
-        string owner_id FK "users.id"
+        string owner_id FK
     }
-    
+
     Lease {
-        int id PK "autoincrement"
-        int property_id FK "properties.id"
-        string tenant_id FK "users.id"
+        int id PK
+        int property_id FK
+        string tenant_id FK
         date start_date
         date end_date
         float rent_amount
-        string status "active / terminated"
+        string status
     }
 ```
 
